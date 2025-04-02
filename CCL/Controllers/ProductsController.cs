@@ -1,4 +1,6 @@
-﻿using CCL.DTOs;
+﻿
+using AutoMapper;
+using CCL.DTOs;
 using CCL.Entities;
 using CCL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -7,18 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CCL.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductosController : ControllerBase
     {
         private readonly IProductRepository _repository;
-        //private readonly IMapper _mapper;
 
         public ProductosController(IProductRepository repository)
         {
             _repository = repository;
-            //_mapper = mapper;
         }
 
         [HttpGet("inventario")]
