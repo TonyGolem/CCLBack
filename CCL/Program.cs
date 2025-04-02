@@ -1,3 +1,8 @@
+using CCL;
+using CCL.Interfaces;
+using CCL.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +13,10 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddDbContext<CclContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options => {
     options.AddPolicy("Policy", policy => {
